@@ -23,10 +23,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Brand Name"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/charm_regular"
+            android:text="Settle.it"
             android:textColor="@color/white"
-            android:textSize="30sp" />
+            android:textSize="32sp" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -61,7 +62,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:paddingLeft="15dp"
-            android:text="User Name"
+            android:text="Hey Harsh"
+            android:fontFamily="@font/playwrite_grund_regular"
             android:textColor="@color/white"
             android:textSize="30sp" />
 
@@ -70,49 +72,185 @@
 
     <FrameLayout
         android:layout_width="409dp"
-        android:layout_height="650dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/frame_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout2">
 
-        <androidx.viewpager.widget.ViewPager
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/pager"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp">
+            android:layout_height="match_parent">
 
             <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout"
+                android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="70dp" />
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tabIndicatorColor="@color/black"
+                app:tabRippleColor="@color/black"
+                app:tabTextColor="@color/black" />
 
-        </androidx.viewpager.widget.ViewPager>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/frameLayout2"
         android:layout_width="match_parent"
         android:layout_height="120dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:background="@drawable/white_edit_field"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
-        tools:layout_editor_absoluteX="-23dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout">
+
+        <FrameLayout
+            android:layout_width="125.66dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/playwrite_grund_regular"
+                android:text="You are Owed"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="55dp"
+                android:fontFamily="@font/playwrite_grund_regular"
+                android:text="₹ 2000"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#FF0000"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="125.66dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="125.66dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/playwrite_grund_regular"
+                android:text="You Owe"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="55dp"
+                android:fontFamily="@font/playwrite_grund_regular"
+                android:text="₹ 2000"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#11FF00"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="125.66dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="251.33dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/playwrite_grund_regular"
+                android:text="Total Balance"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="55dp"
+                android:fontFamily="@font/playwrite_grund_regular"
+                android:text="₹ 2000"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+
+
 
         <View
             android:layout_width="1dp"
             android:layout_height="100dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="125.66dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/black" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="100dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="251.33dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/black" />
+
     </FrameLayout>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"/>
+        </LinearLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/header"
+            app:menu="@menu/menu"
+            android:fitsSystemWindows="true" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
