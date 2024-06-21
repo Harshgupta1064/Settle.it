@@ -1,4 +1,4 @@
-package com.example.splitwise
+package com.example.splitwise.models
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
