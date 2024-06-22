@@ -4,6 +4,10 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
+    <style name="DatePicker" parent="Theme.Material3.DayNight.Dialog">
+        <item name="colorAccent"> @color/black</item>
+
+    </style>
 
     <style name="Theme.SplitWise" parent="Base.Theme.SplitWise" />
 </resources>
