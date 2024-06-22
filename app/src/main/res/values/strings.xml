@@ -2,4 +2,8 @@
     <string name="app_name">Split Wise</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="your_web_client_id">"AIzaSyDgS-WRpHvqk9Bk-H0MJlRnICzcnFaJ9i0"</string>
+    <string name="facebook_app_id">"444007115108881"</string>
+    <string name="fb_app_secret">"520d479324e926bcf9b6879ef9057146"</string>
+    <string name="keyHashes">"lcG3DSSdw/+NPWqGHsJHYlNthVU="</string>
 </resources>

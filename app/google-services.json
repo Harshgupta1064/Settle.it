@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "421771562585",
+    "project_id": "settle-it-55770",
+    "storage_bucket": "settle-it-55770.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421771562585:android:0e4a20037130c16aecab48",
+        "android_client_info": {
+          "package_name": "com.example.splitwise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421771562585-9rrhpgohbqbl5jratfapc4ovi27src86.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.splitwise",
+            "certificate_hash": "95c1b70d249dc3ff8d3d6a861ec24762536d8555"
+          }
+        },
+        {
+          "client_id": "421771562585-p6e46vku25md2kctlh8geo8dd9eur38i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgS-WRpHvqk9Bk-H0MJlRnICzcnFaJ9i0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421771562585-p6e46vku25md2kctlh8geo8dd9eur38i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

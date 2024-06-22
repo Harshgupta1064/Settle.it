@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".PaymentOptionsPage">
+
+    <FrameLayout
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:background="@android:color/transparent"
+            android:scaleType="center"
+            android:src="@drawable/back_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/playwrite_grund_regular"
+            android:text="Settle Up"
+            android:textColor="@color/white"
+            android:textSize="28dp" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/playwrite_grund_regular"
+        android:text="You Owe Friend's Name : ₹ 500"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/white_button"
+        android:elevation="15dp"
+        android:fontFamily="@font/playwrite_grund_regular"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="8dp"
+        android:text="You ---> Friend's Name"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+
+    <RadioGroup
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_button"
+        android:elevation="15dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18">
+
+        <RadioButton
+            style="@style/Widget.App.RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:button="@drawable/radio_button"
+            android:buttonTint="@color/black"
+            android:drawableTop="@drawable/paytm"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/playwrite_grund_regular"
+            android:hapticFeedbackEnabled="false"
+            android:shadowColor="@color/black"
+            android:text="Pay via Paytm"
+            android:textColorHighlight="@color/black"
+            android:textColorHint="@color/black"
+            android:textColorLink="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            style="@style/Widget.App.RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:button="@drawable/radio_button"
+            android:buttonTint="@color/black"
+            android:drawableTop="@drawable/gpay"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/playwrite_grund_regular"
+            android:hapticFeedbackEnabled="false"
+            android:shadowColor="@color/black"
+            android:text="Pay via GPay"
+            android:textColorHighlight="@color/black"
+            android:textColorHint="@color/black"
+            android:textColorLink="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            style="@style/Widget.App.RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:button="@drawable/radio_button"
+            android:buttonTint="@color/black"
+            android:drawableTop="@drawable/phone_pe"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/playwrite_grund_regular"
+            android:hapticFeedbackEnabled="false"
+            android:shadowColor="@color/black"
+            android:text="Pay via PhonePe"
+            android:textColorHighlight="@color/black"
+            android:textColorHint="@color/black"
+            android:textColorLink="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            style="@style/Widget.App.RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical"
+            android:button="@drawable/radio_button"
+            android:buttonTint="@color/black"
+            android:drawableTop="@drawable/debitcard"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/playwrite_grund_regular"
+            android:hapticFeedbackEnabled="false"
+            android:shadowColor="@color/black"
+            android:text="Pay via Debit/Credit Card"
+            android:textColorHighlight="@color/black"
+            android:textColorHint="@color/black"
+            android:textColorLink="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

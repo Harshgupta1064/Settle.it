@@ -23,5 +23,6 @@
         android:layout_marginRight="16dp"
         android:clickable="true"
         app:rippleColor="@color/black"
+        android:background="@color/black"
         android:src="@android:drawable/ic_input_add" />
 </FrameLayout>
