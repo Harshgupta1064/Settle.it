@@ -144,7 +144,7 @@
                 android:fontFamily="@font/playwrite_grund_regular"
                 android:text="₹ 2000"
                 android:layout_gravity="center_horizontal"
-                android:textColor="#FF0000"
+                android:textColor="@color/green"
                 android:textSize="16dp"
                 android:textStyle="bold" />
         </FrameLayout>
@@ -173,7 +173,7 @@
                 android:fontFamily="@font/playwrite_grund_regular"
                 android:text="₹ 2000"
                 android:layout_gravity="center_horizontal"
-                android:textColor="#11FF00"
+                android:textColor="@color/red"
                 android:textSize="16dp"
                 android:textStyle="bold" />
         </FrameLayout>

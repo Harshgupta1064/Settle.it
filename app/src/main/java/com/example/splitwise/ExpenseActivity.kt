@@ -1,6 +1,7 @@
 package com.example.splitwise
 
 import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -10,15 +11,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.splitwise.databinding.ActivityExpenseBinding
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
 class ExpenseActivity : AppCompatActivity() {
+    val binding: ActivityExpenseBinding by lazy {
+        ActivityExpenseBinding.inflate(layoutInflater)
+    }
+    lateinit var splitDialog: Dialog
+    private val calander = Calendar.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
-        val binding: ActivityExpenseBinding by lazy {
-            ActivityExpenseBinding.inflate(layoutInflater)
-        }
-        lateinit var splitDialog: Dialog
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
@@ -42,17 +45,32 @@ class ExpenseActivity : AppCompatActivity() {
         binding.paidByMenu.adapter = mArrayAdapter
 
 //      For Date Picker
-        binding.dateText.setOnClickListener{
+        val date = Calendar.getInstance()
+        date.set(calander.get(Calendar.YEAR),calander.get(Calendar.MONTH),calander.get(Calendar.DAY_OF_MONTH))
+        val formatDate = SimpleDateFormat("dd MMMM yyyy",Locale.getDefault())
+        val formattedDate = formatDate.format(Date())
+        binding.dateText.text = formattedDate
+        binding.dateText.setOnClickListener {
             openDateDialog()
         }
 
     }
 
     private fun openDateDialog() {
-        val date = SimpleDateFormat("dd", Locale.getDefault()).format(Date())
-        val month = SimpleDateFormat("MM", Locale.getDefault()).format(Date())
-        val Year = SimpleDateFormat("YYYY", Locale.getDefault()).format(Date())
-        var datePickerDialog: Dialog = DatePickerDialog(this,R.style.DatePicker,)
+        var datePickerDialog: Dialog = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener(){ datePicker:DatePicker, year: Int, month: Int, date: Int ->
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(year,month,date)
+                val dateFormat = SimpleDateFormat("dd MMMM yyyy",Locale.getDefault())
+                val formattedDate = dateFormat.format(selectedDate.time)
+                binding.dateText.text = formattedDate
+            },
+            calander.get(Calendar.YEAR),
+            calander.get(Calendar.MONTH),
+            calander.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.show()
     }
 
 }

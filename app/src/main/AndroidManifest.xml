@@ -13,6 +13,18 @@
         android:theme="@style/Theme.SplitWise"
         tools:targetApi="31">
         <activity
+            android:name=".PaymentOptionsPage"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SettleUpPage"
+            android:exported="false" />
+        <activity
             android:name=".userOweInGroup"
             android:exported="false" />
         <activity
@@ -20,13 +32,8 @@
             android:exported="false" />
         <activity
             android:name=".ExpenseActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".FriendsListActivity"
             android:exported="false" />
@@ -47,7 +54,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="false" />
     </application>
 
 </manifest>
