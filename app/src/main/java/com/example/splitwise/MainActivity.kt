@@ -5,8 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.splitwise.databinding.ActivityMainBinding
-import com.example.splitwise.models.ViewPagerAdapter
-import com.google.android.material.tabs.TabLayout
+import com.example.splitwise.adapters.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {

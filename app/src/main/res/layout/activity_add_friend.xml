@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/friendName"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="16dp"
@@ -61,6 +61,8 @@
         android:elevation="15dp"
         android:fontFamily="@font/playwrite_grund_regular"
         android:hint="Friend Name"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
         android:paddingLeft="16dp"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,19 +82,21 @@
         android:textSize="28dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/friendName" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
+        android:textColorHint="@color/black"
         android:background="@drawable/white_button"
         android:elevation="15dp"
         android:fontFamily="@font/playwrite_grund_regular"
         android:hint="Email I'd"
+        android:textColor="@color/black"
         android:inputType="textEmailAddress"
         android:paddingLeft="16dp"
         android:textSize="20dp"
@@ -101,7 +105,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
+        android:id="@+id/addFriend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -116,6 +120,6 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

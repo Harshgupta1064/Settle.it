@@ -1,7 +1,6 @@
 package com.example.splitwise
 
 import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -28,7 +27,7 @@ class ExpenseActivity : AppCompatActivity() {
 
 //      For Dialog box of Radio Buttons
         splitDialog = Dialog(this)
-        splitDialog.setContentView(R.layout.add_friend)
+        splitDialog.setContentView(R.layout.add_friend_in_group)
         binding.splitRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             val selectedOption = when (checkedId) {
                 R.id.splitEqually -> "Split Equally"

@@ -38,6 +38,7 @@ import io.realm.Realm.init
 import org.json.JSONException
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.util.Arrays
 import com.facebook.FacebookCallback as FacebookCallback
 
 class LoginScreen : AppCompatActivity() {
@@ -66,6 +67,13 @@ class LoginScreen : AppCompatActivity() {
         FacebookSdk.sdkInitialize(LoginScreen@ this)
         callbackManager = CallbackManager.Factory.create()
         facebookLogin()
+        binding.facebookButton.setOnClickListener {
+            loginManager.logInWithReadPermissions(
+                this@LoginScreen,
+                Arrays.asList("email")
+            )
+
+        }
 
 //      No Account Setup
         binding.DontHaveAccountButton.setOnClickListener {
