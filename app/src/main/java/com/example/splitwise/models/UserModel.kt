@@ -2,6 +2,7 @@ package com.example.splitwise.models
 
 data class UserModel(
     var userId:String?=null,
+    val userImage:String="",
     var userName:String?=null,
     var email:String?=null,
     var password:String?=null,
@@ -9,8 +10,8 @@ data class UserModel(
     var owedMoney:Int = 0,
     var oweMoney:Int = 0,
     var balance:Int = 0,
-    var friends:ArrayList<UserModel>?=null,
-    var groups:ArrayList<GroupModel>?=null,
+    var friends:ArrayList<String>?=null,
+    var groups:ArrayList<String>?=null,
 ){
 
 }

@@ -36,15 +36,14 @@
 
     </FrameLayout>
 
-
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/playwrite_grund_regular"
-        android:text="Friend Email"
+        android:text="Group Name"
         android:textColor="@color/black"
         android:textSize="28dp"
         android:textStyle="bold"
@@ -52,42 +51,71 @@
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/groupName"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
-        android:textColorHint="@color/black"
         android:background="@drawable/white_button"
         android:elevation="15dp"
         android:fontFamily="@font/playwrite_grund_regular"
-        android:hint="Email I'd"
+        android:hint="Group Name"
+        android:textColorHint="@color/black"
         android:textColor="@color/black"
-        android:inputType="textEmailAddress"
         android:paddingLeft="16dp"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/addFriend"
+
+    <TextView
+        android:id="@+id/addFriendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/white_button"
+        android:elevation="15dp"
+        android:fontFamily="@font/playwrite_grund_regular"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="5dp"
+        android:text="Add Friends >"
+        android:textColor="@color/black"
+        android:textSize="28dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/groupName" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/createGroupButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
         android:background="@drawable/white_button"
         android:elevation="15dp"
         android:fontFamily="@font/playwrite_grund_regular"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
-        android:text="Add Friend"
+        android:text="Create Group"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="409dp"
+        android:layout_height="463dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addFriendButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

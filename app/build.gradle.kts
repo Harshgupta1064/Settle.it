@@ -59,5 +59,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.21")
     implementation ("io.realm:realm-annotations-processor:10.11.0")
     implementation ("com.facebook.android:facebook-login:17.0.0")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 
 }

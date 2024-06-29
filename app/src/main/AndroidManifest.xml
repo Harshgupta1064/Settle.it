@@ -12,26 +12,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SplitWise"
         tools:targetApi="31">
+        <activity
+            android:name=".CreateGroup"
+            android:exported="false" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
-
+            android:value="@string/facebook_app_id" />
         <meta-data
             android:name="com.facebook.sdk.ClientToken"
-            android:value="@string/fb_client_token"/>
-
-        <!-- Uncomment this if you are using FacebookActivity
+            android:value="@string/fb_client_token" />
+        <!--
+ Uncomment this if you are using FacebookActivity
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
         -->
-
         <activity
             android:name=".PaymentOptionsPage"
-            android:exported="true" >
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".SettleUpPage"
             android:exported="false" />
@@ -58,9 +58,10 @@
             android:exported="false" />
         <activity
             android:name=".LoginScreen"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

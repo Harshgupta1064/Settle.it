@@ -39,8 +39,9 @@
                     android:id="@+id/profile_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:elevation="15dp"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/equipay" />
+                    app:srcCompat="@drawable/user_01" />
             </androidx.cardview.widget.CardView>
 
             <TextView
