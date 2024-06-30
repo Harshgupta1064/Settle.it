@@ -28,6 +28,7 @@ class FriendsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("FriendsFragment", "onCreateView called")
         binding = FragmentFriendsBinding.inflate(inflater, container, false)
         auth = FirebaseAuth.getInstance()
         rootRef = FirebaseDatabase.getInstance().reference.child("Users")

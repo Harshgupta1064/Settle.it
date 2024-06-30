@@ -2,33 +2,40 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <group android:checkableBehavior="single">
-        <item android:title="Profile"
-            android:icon="@drawable/home_02"/>
-        <item android:title="Your Expense History"
-            android:icon="@drawable/history_icon"/>
-        <item android:title="Notifications"
-            android:icon="@drawable/notification_alert_icon"/>
-        <item android:title="Payment History"
-            android:icon="@drawable/history_icon"/>
-        <item android:title="Settings"
-            android:icon="@drawable/settings_icon"/>
+    <group android:id="@+id/group1">
+        <item
+            android:icon="@drawable/home_02"
+            android:title="Profile" />
+        <item
+            android:icon="@drawable/history_icon"
+            android:title="Your Expense History" />
+        <item
+            android:icon="@drawable/notification_alert_icon"
+            android:title="Notifications" />
+        <item
+            android:icon="@drawable/history_icon"
+            android:title="Payment History" />
+        <item
+            android:icon="@drawable/settings_icon"
+            android:title="Settings" />
     </group>
 
-    <item android:title="Support" >
-        <menu>
-            <group android:checkableBehavior="single">
-                <item android:title="Share This App"
-                    android:icon="@drawable/share_icon"/>
-                <item android:title="Help"
-                    android:icon="@drawable/help"/>
-                <item android:title="About"
-                    android:icon="@drawable/about_us_icon"/>
-                <item android:title="Rate Us"
-                    android:icon="@drawable/rate_us_icon"/>
-                <item android:title="Log Out"
-                    android:icon="@drawable/log_out_icon"/>
-            </group>
-        </menu>
-    </item>
+
+    <group android:id="@+id/group2">
+        <item
+            android:icon="@drawable/share_icon"
+            android:title="Share This App" />
+        <item
+            android:icon="@drawable/help"
+            android:title="Help" />
+        <item
+            android:icon="@drawable/about_us_icon"
+            android:title="About" />
+        <item
+            android:icon="@drawable/rate_us_icon"
+            android:title="Rate Us" />
+    </group>
+    <item
+        android:icon="@drawable/log_out_icon"
+        android:title="Log Out" />
 </menu>

@@ -2,6 +2,7 @@ package com.example.splitwise
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +25,7 @@ class GroupsFragment : Fragment() {
     private lateinit var binding : FragmentGroupsBinding
     private lateinit var auth : FirebaseAuth
     private lateinit var rootRef: DatabaseReference
-    private var groupList:ArrayList<GroupModel>?=null
+    private var groupIdList:ArrayList<String>?=null
     private var adapter:groupsAdapter?=null
 
     override fun onCreateView(
@@ -32,10 +33,11 @@ class GroupsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("GroupsFragment", "onCreateView called")
         binding = FragmentGroupsBinding.inflate(layoutInflater,container,false)
         auth = FirebaseAuth.getInstance()
         rootRef = Firebase.database.reference.child("Users")
-//        retrieveGroupsData()
+        retrieveGroupsData()
         binding.floatingActionButton.setOnClickListener{
             startActivity(Intent(requireContext(),CreateGroup::class.java))
         }
@@ -46,11 +48,11 @@ class GroupsFragment : Fragment() {
         val userId = auth.currentUser!!.uid
         rootRef.child(userId).child("groups").addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                groupList!!.clear()
+                groupIdList?.clear()
                 for(group in snapshot.children){
-                    val group: GroupModel? = group.getValue(GroupModel::class.java)
-                    if (group != null) {
-                        groupList!!.add(group)
+                    val groupId: String? = group.getValue(String::class.java)
+                    if (groupId != null) {
+                        groupIdList!!.add(groupId)
                     }
                 }
                 setAdapter()
@@ -64,9 +66,11 @@ class GroupsFragment : Fragment() {
     }
 
     private fun setAdapter() {
-        adapter = groupsAdapter(groupList!!,requireContext())
-        binding.groupRecyclerView.adapter=adapter
-        binding.groupRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        if(groupIdList!=null){
+            adapter = groupsAdapter(groupIdList!!, requireContext())
+            binding.groupRecyclerView.adapter = adapter
+            binding.groupRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        }
     }
 
 

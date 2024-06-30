@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity">
+
 
     <FrameLayout
         android:id="@+id/titleBar"
@@ -30,6 +30,7 @@
             android:textSize="32sp" />
 
         <ImageButton
+            android:id="@+id/sideDrawerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -47,6 +48,7 @@
 
     </FrameLayout>
 
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
@@ -61,9 +63,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
+            android:fontFamily="@font/playwrite_grund_regular"
             android:paddingLeft="15dp"
             android:text="Hey Harsh"
-            android:fontFamily="@font/playwrite_grund_regular"
             android:textColor="@color/white"
             android:textSize="30sp" />
 
@@ -102,13 +104,8 @@
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-                app:layout_constraintVertical_bias="0.0" >
-
-
-            </androidx.viewpager2.widget.ViewPager2>
+                app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -118,8 +115,8 @@
         android:id="@+id/frameLayout2"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:background="@drawable/white_edit_field"
         app:layout_constraintEnd_toEndOf="parent"
@@ -133,10 +130,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/playwrite_grund_regular"
                 android:text="You are Owed"
-                android:layout_gravity="center_horizontal"
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -144,10 +141,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="55dp"
                 android:fontFamily="@font/playwrite_grund_regular"
                 android:text="₹ 2000"
-                android:layout_gravity="center_horizontal"
                 android:textColor="@color/green"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -162,10 +159,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/playwrite_grund_regular"
                 android:text="You Owe"
-                android:layout_gravity="center_horizontal"
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -173,10 +170,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="55dp"
                 android:fontFamily="@font/playwrite_grund_regular"
                 android:text="₹ 2000"
-                android:layout_gravity="center_horizontal"
                 android:textColor="@color/red"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -190,10 +187,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/playwrite_grund_regular"
                 android:text="Total Balance"
-                android:layout_gravity="center_horizontal"
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 android:textStyle="bold" />
@@ -201,16 +198,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="55dp"
                 android:fontFamily="@font/playwrite_grund_regular"
                 android:text="₹ 2000"
-                android:layout_gravity="center_horizontal"
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 android:textStyle="bold" />
         </FrameLayout>
-
-
 
 
         <View
@@ -229,32 +224,5 @@
 
     </FrameLayout>
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"/>
-        </LinearLayout>
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigation_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:headerLayout="@layout/header"
-            app:menu="@menu/menu"
-            android:fitsSystemWindows="true" />
-
-    </androidx.drawerlayout.widget.DrawerLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

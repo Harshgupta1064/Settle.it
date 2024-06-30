@@ -13,6 +13,9 @@
         android:theme="@style/Theme.SplitWise"
         tools:targetApi="31">
         <activity
+            android:name=".DrawerActivity"
+            android:exported="false" />
+        <activity
             android:name=".CreateGroup"
             android:exported="false" />
 
@@ -31,7 +34,7 @@
         -->
         <activity
             android:name=".PaymentOptionsPage"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".SettleUpPage"
             android:exported="false" />
