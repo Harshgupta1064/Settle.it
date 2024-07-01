@@ -8,18 +8,20 @@ import com.example.splitwise.databinding.FriendsItemBinding
 import android.content.Context
 import android.widget.Toast
 import com.example.splitwise.models.UserModel
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 
 class friendsAdapter(
     private val friendsList: ArrayList<String>, private val context: Context
 ) : RecyclerView.Adapter<friendsAdapter.friendsViewHolder>() {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private var rootRef = FirebaseDatabase.getInstance().reference.child("Users")
+    private var rootRef = Firebase.database.reference.child("Users")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): friendsViewHolder {
         val binding = FriendsItemBinding.inflate(

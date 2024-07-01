@@ -1,6 +1,7 @@
 package com.example.splitwise
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -29,11 +30,11 @@ class CreateGroup : AppCompatActivity(), addFriendAdapter.ItemClickListener {
         AddFriendInGroupBinding.inflate(layoutInflater)
     }
     private lateinit var groupName: String
-    private lateinit var auth: FirebaseAuth
-    private lateinit var rootRef: DatabaseReference
+    private var groupKey: String = String()
     private var groupMembersId: ArrayList<String> = arrayListOf()
     private var groupMembersName: ArrayList<String> = arrayListOf()
     private lateinit var addFriendDialog: Dialog
+    private lateinit var uniqueGroupId:String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,9 +42,7 @@ class CreateGroup : AppCompatActivity(), addFriendAdapter.ItemClickListener {
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        auth = FirebaseAuth.getInstance()
-        rootRef = Firebase.database.reference
-
+        uniqueGroupId = String()
 //      for adding friend in group
         addFriendDialog = Dialog(this)
         addFriendDialog.setContentView(binding2.root)
@@ -52,15 +51,28 @@ class CreateGroup : AppCompatActivity(), addFriendAdapter.ItemClickListener {
             addFriendDialog.show()
         }
 
+//      adding user to the group
+        addUserToGroup()
+
+
+//      setting all the data
         getFriendIds()
 
     }
 
+    private fun addUserToGroup() {
+        val userAuth = FirebaseAuth.getInstance()
+        val userId = userAuth.currentUser!!.uid
+        groupMembersName.add("You")
+        groupMembersId.add(userId)
+
+    }
+
     private fun getFriendIds() {
+        val auth = FirebaseAuth.getInstance()
         val userId = auth.currentUser!!.uid
         val friendsList = ArrayList<String>()
-        auth = FirebaseAuth.getInstance()
-        rootRef = Firebase.database.reference.child("Users").child(userId).child("friends")
+        val rootRef = Firebase.database.reference.child("Users").child(userId).child("friends")
         rootRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (friendId in snapshot.children) {
@@ -81,9 +93,9 @@ class CreateGroup : AppCompatActivity(), addFriendAdapter.ItemClickListener {
 
     private fun getFriendsData(friendsList: ArrayList<String>) {
         val friendsDataList = ArrayList<UserModel>()
-        auth = FirebaseAuth.getInstance()
+        val auth = FirebaseAuth.getInstance()
         for (friendId in friendsList) {
-            rootRef = Firebase.database.reference.child("Users").child(friendId)
+            val rootRef = Firebase.database.reference.child("Users").child(friendId)
             rootRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val friendData = snapshot.getValue(UserModel::class.java)
@@ -100,7 +112,7 @@ class CreateGroup : AppCompatActivity(), addFriendAdapter.ItemClickListener {
 
         }
         setAddFriendAdapter(friendsDataList)
-        binding2.createGroupButton.setOnClickListener {
+        binding2.AddFriendButton.setOnClickListener {
             setAdapterToFriendListPreview()
             addFriendDialog.dismiss()
         }
@@ -108,9 +120,11 @@ class CreateGroup : AppCompatActivity(), addFriendAdapter.ItemClickListener {
             groupName = binding.groupName.text.toString().trim()
             if (groupMembersName.isNotEmpty() && groupName.isNotEmpty()) {
                 setGroupInFirebase()
+                setGroupIdToUsers()
             } else {
                 Toast.makeText(this, "Please Enter Group Name", Toast.LENGTH_SHORT).show()
             }
+            startActivity(Intent(this,MainActivity::class.java))
         }
 
 
@@ -123,28 +137,29 @@ class CreateGroup : AppCompatActivity(), addFriendAdapter.ItemClickListener {
         val adapter = addFriendAdapter(friendDataList, this, this)
         binding2.addFriendRecyclerView.adapter = adapter
         binding2.addFriendRecyclerView.layoutManager = LinearLayoutManager(this)
-
     }
 
 
     override fun onCheckedCheckbox(position: Int, friend: UserModel) {
-        groupMembersId.add(friend.userId!!)
-        groupMembersName.add(friend.userName!!)
+        if (!groupMembersId.contains(friend.userId)) {
+            groupMembersId.add(friend.userId!!)
+            groupMembersName.add(friend.userName!!)
 
-
+        }
     }
 
     private fun setGroupInFirebase() {
         val group: GroupModel = GroupModel()
-        auth = FirebaseAuth.getInstance()
-        rootRef = Firebase.database.reference.child("Groups")
-        var groupKey = rootRef.push().key
+        val auth = FirebaseAuth.getInstance()
+        val rootRef = Firebase.database.reference.child("Groups")
+        groupKey = rootRef.push().key.toString()
+        uniqueGroupId = groupKey
         group.groupMembers = groupMembersId
         group.groupId = groupKey
         group.groupName = groupName
 
         if (groupKey != null) {
-            rootRef.push().setValue(group).addOnSuccessListener {
+            rootRef.child(groupKey).setValue(group).addOnSuccessListener {
                 Toast.makeText(this, "group added successfully", Toast.LENGTH_SHORT).show()
             }.addOnFailureListener {
                 Toast.makeText(this, "group not added", Toast.LENGTH_SHORT).show()
@@ -153,8 +168,37 @@ class CreateGroup : AppCompatActivity(), addFriendAdapter.ItemClickListener {
     }
 
     private fun setAdapterToFriendListPreview() {
+        Toast.makeText(this@CreateGroup, "$groupMembersName", Toast.LENGTH_SHORT).show()
         val adapter = friendsPreviewAdapter(groupMembersName, this)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun setGroupIdToUsers() {
+        val auth = FirebaseAuth.getInstance()
+        val userId = auth.currentUser?.uid
+        val rootRef = Firebase.database.reference.child("Users")
+        for (memberId in groupMembersId) {
+            val memberGroupList: ArrayList<String> = arrayListOf()
+            rootRef.child(memberId).child("groups")
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        for (group in snapshot.children) {
+                            val memberGroupId = group.getValue(String::class.java)
+                            if (memberGroupId != null) {
+                                memberGroupList.add(memberGroupId)
+                            }
+                        }
+
+                        memberGroupList.add(uniqueGroupId)
+                        rootRef.child(memberId).child("groups").setValue(memberGroupList)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(this@CreateGroup, "Something went Wrong", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                })
+        }
     }
 }

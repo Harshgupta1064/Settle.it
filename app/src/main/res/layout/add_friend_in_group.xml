@@ -23,7 +23,7 @@
             tools:listitem="@layout/add_friend_item" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/createGroupButton"
+            android:id="@+id/AddFriendButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
@@ -34,7 +34,7 @@
             android:fontFamily="@font/playwrite_grund_regular"
             android:paddingLeft="24dp"
             android:paddingRight="24dp"
-            android:text="Create Group"
+            android:text="Add Friends"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="20sp"

@@ -155,7 +155,7 @@ class ExpenseActivity : AppCompatActivity(),addFriendAdapter.ItemClickListener {
     }
 
     override fun onCheckedCheckbox(position: Int, friend: UserModel) {
-
+        TODO("Not yet implemented")
     }
 
 }

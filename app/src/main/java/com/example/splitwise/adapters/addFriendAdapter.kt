@@ -38,19 +38,13 @@ class addFriendAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
             val friend = friendsList[position]
-            binding.friendName.text = friend.userName
-
-            binding.friendName.setOnCheckedChangeListener{
-                _, isChecked ->
+            binding.friendName.text = friend.userName // Assuming friendName is a CheckBox
+            binding.friendName.setOnCheckedChangeListener{ _, isChecked ->
                 if(isChecked){
                     itemClickListener.onCheckedCheckbox(position,friend)
-
                 }
-
             }
-
         }
-
     }
 
     interface ItemClickListener {

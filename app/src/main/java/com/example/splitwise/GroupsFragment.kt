@@ -46,7 +46,7 @@ class GroupsFragment : Fragment() {
 
     private fun retrieveGroupsData() {
         val userId = auth.currentUser!!.uid
-        rootRef.child(userId).child("groups").addListenerForSingleValueEvent(object:ValueEventListener{
+        rootRef.child(userId).child("Groups").addListenerForSingleValueEvent(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 groupIdList?.clear()
                 for(group in snapshot.children){
@@ -54,6 +54,7 @@ class GroupsFragment : Fragment() {
                     if (groupId != null) {
                         groupIdList!!.add(groupId)
                     }
+                    Toast.makeText(requireContext(), "Groups loading Currently", Toast.LENGTH_SHORT).show()
                 }
                 setAdapter()
             }

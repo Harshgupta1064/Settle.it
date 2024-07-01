@@ -28,13 +28,11 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = viewPagerAdapter
         viewPagerAdapter.addFragment(FriendsFragment())
         viewPagerAdapter.addFragment(GroupsFragment())
-        viewPagerAdapter.addFragment(FriendsFragment())
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
                 0 -> tab.text = "Friends"
                 1 -> tab.text = "Groups"
-                2 -> tab.text = "Requests"
             }
         }.attach()
 
