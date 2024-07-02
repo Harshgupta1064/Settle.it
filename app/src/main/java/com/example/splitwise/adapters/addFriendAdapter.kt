@@ -41,14 +41,14 @@ class addFriendAdapter(
             binding.friendName.text = friend.userName // Assuming friendName is a CheckBox
             binding.friendName.setOnCheckedChangeListener{ _, isChecked ->
                 if(isChecked){
-                    itemClickListener.onCheckedCheckbox(position,friend)
+                    itemClickListener.onCheckedCheckbox(friend)
                 }
             }
         }
     }
 
     interface ItemClickListener {
-        fun onCheckedCheckbox(position: Int,friend:UserModel)
+        fun onCheckedCheckbox(friend:UserModel)
     }
 
 

@@ -1,216 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".ExpenseActivity">
-    <FrameLayout
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/black"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:background="@android:color/transparent"
-            android:scaleType="center"
-            android:src="@drawable/back_icon" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:background="@android:color/transparent"
+                android:scaleType="center"
+                android:src="@drawable/back_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/playwrite_grund_regular"
+                android:text="Expense"
+                android:textColor="@color/white"
+                android:textSize="28dp" />
+
+        </FrameLayout>
 
         <TextView
+            android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="32dp"
             android:fontFamily="@font/playwrite_grund_regular"
             android:text="Expense"
-            android:textColor="@color/white"
-            android:textSize="28dp" />
+            android:textColor="@color/black"
+            android:textSize="28dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
-    </FrameLayout>
+        <EditText
+            android:id="@+id/expenseName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/white_button"
+            android:elevation="15dp"
+            android:fontFamily="@font/playwrite_grund_regular"
+            android:hint="Expense Name"
+            android:paddingLeft="16dp"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView13"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/playwrite_grund_regular"
-        android:text="Expense"
-        android:textColor="@color/black"
-        android:textSize="28dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/white_button"
-        android:elevation="15dp"
-        android:fontFamily="@font/playwrite_grund_regular"
-        android:hint="Expense Name"
-        android:paddingLeft="16dp"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/playwrite_grund_regular"
-        android:text="Amount"
-        android:textColor="@color/black"
-        android:textSize="28dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:inputType="number"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/white_button"
-        android:elevation="15dp"
-        android:fontFamily="@font/playwrite_grund_regular"
-        android:hint="Amount (Rs)"
-        android:paddingLeft="16dp"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/playwrite_grund_regular"
-        android:text="Paid By"
-        android:textColor="@color/black"
-        android:textSize="28dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
-
-    <Spinner
-        android:id="@+id/paidByMenu"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/white_button"
-        android:elevation="15dp"
-        android:paddingLeft="16dp"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/playwrite_grund_regular"
-        android:text="Date"
-        android:textColor="@color/black"
-        android:textSize="28dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/paidByMenu" />
-
-    <TextView
-        android:id="@+id/dateText"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/white_button"
-        android:elevation="15dp"
-        android:fontFamily="@font/playwrite_grund_regular"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-
-    <RadioGroup
-        android:id="@+id/splitRadioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateText">
-
-        <RadioButton
-            android:id="@+id/splitEqually"
+        <TextView
+            android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/playwrite_grund_regular"
-            android:text="Split Equally"
+            android:text="Amount"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="28dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/expenseName" />
 
-        <RadioButton
-            android:id="@+id/splitInBetween"
+        <EditText
+            android:id="@+id/expenseAmount"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/white_button"
+            android:elevation="15dp"
+            android:fontFamily="@font/playwrite_grund_regular"
+            android:hint="Amount (Rs)"
+            android:inputType="number"
+            android:paddingLeft="16dp"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+        <TextView
+            android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/playwrite_grund_regular"
-            android:text="Split in between"
+            android:text="Paid By"
             android:textColor="@color/black"
+            android:textSize="28dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/expenseAmount" />
+
+        <Spinner
+            android:id="@+id/paidByMenu"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/white_button"
+            android:elevation="15dp"
+            android:paddingLeft="16dp"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView15"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/playwrite_grund_regular"
+            android:text="Date"
+            android:textColor="@color/black"
+            android:textSize="28dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/paidByMenu" />
+
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/white_button"
+            android:elevation="15dp"
+            android:fontFamily="@font/playwrite_grund_regular"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView16"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+        <RadioGroup
+            android:id="@+id/splitRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateText">
+
+            <RadioButton
+                android:id="@+id/splitEqually"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/playwrite_grund_regular"
+                android:text="Split Equally"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/splitInBetween"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/playwrite_grund_regular"
+                android:text="Split in between"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </RadioGroup>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveExpenseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/white_button"
+            android:elevation="15dp"
+            android:fontFamily="@font/playwrite_grund_regular"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:text="Save Expense"
+            android:textAllCaps="false"
             android:textSize="20sp"
-            android:textStyle="bold" />
-    </RadioGroup>
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/expenseRecyclerView" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Save Expense"
-        android:textAllCaps="false"
-        android:fontFamily="@font/playwrite_grund_regular"
-        android:background="@drawable/white_button"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:elevation="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/splitRadioGroup" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/expenseRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/splitRadioGroup" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

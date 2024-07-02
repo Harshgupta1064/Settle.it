@@ -39,7 +39,7 @@
             android:name=".SettleUpPage"
             android:exported="false" />
         <activity
-            android:name=".userOweInGroup"
+            android:name=".UserOweInGroupActivity"
             android:exported="false" />
         <activity
             android:name=".AddFriend"

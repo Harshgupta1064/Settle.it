@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import android.content.Context
+import android.content.Intent
+import com.example.splitwise.GroupsActivity
 import com.example.splitwise.databinding.GroupsItemBinding
 import com.example.splitwise.models.GroupModel
 import com.google.firebase.auth.FirebaseAuth
@@ -18,6 +20,8 @@ class groupsAdapter(
 ) : RecyclerView.Adapter<groupsAdapter.GroupsViewHolder>() {
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private var rootRef = FirebaseDatabase.getInstance().reference
+    private var selectedGroupName :String = String()
+    private var selectedGroupId :String = String()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupsViewHolder {
         val binding = GroupsItemBinding.inflate(
@@ -45,7 +49,9 @@ class groupsAdapter(
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val group = snapshot.getValue(GroupModel::class.java)
                         if(group!=null){
-                            groupName.text = group.groupName
+                            selectedGroupName = group.groupName!!
+                            selectedGroupId = group.groupId!!
+                            groupName.text = selectedGroupName
                             noOfMembers.text = group.groupMembers!!.size.toString()
                         }
                     }
@@ -54,6 +60,12 @@ class groupsAdapter(
                         TODO("Not yet implemented")
                     }
                 })
+                binding.groupCardView.setOnClickListener{
+                    val intent = Intent(context,GroupsActivity::class.java)
+                    intent.putExtra("groupName",selectedGroupName)
+                    intent.putExtra("groupId",selectedGroupId)
+                    context.startActivity(intent)
+                }
             }
         }
     }

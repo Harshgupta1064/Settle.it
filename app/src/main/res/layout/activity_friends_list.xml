@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@color/black"
     tools:context=".FriendsListActivity">
 
@@ -26,6 +27,7 @@
             android:src="@drawable/back_icon" />
 
         <TextView
+            android:id="@+id/groupButtonHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -44,34 +46,30 @@
         app:layout_constraintTop_toBottomOf="@+id/view">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/friendRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"/>
 
         <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/AddFriendButton"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
             android:layout_gravity="bottom|right"
+            android:elevation="15dp"
+            android:background="@drawable/white_button"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp">
-
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/addFriendButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:elevation="15dp"
-                android:background="@drawable/white_button"/>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:text="Add Friend"
-                android:padding="16dp"
-                android:textStyle="bold"
+                android:gravity="center"
                 android:fontFamily="@font/playwrite_grund_regular"
-                android:elevation="16dp"
-                android:textColor="@android:color/black"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:text="Add Friend"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+
         </FrameLayout>
 
 

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
+    android:fitsSystemWindows="true"
     tools:context=".GroupsActivity">
 
     <FrameLayout
@@ -26,6 +27,7 @@
             android:src="@drawable/back_icon" />
 
         <TextView
+            android:id="@+id/groupName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -45,6 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view" >
 
         <TextView
+            android:id="@+id/friendsListButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Friends List"
@@ -62,6 +65,7 @@
 
 
         <TextView
+            android:id="@+id/howMuchYouOweButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="How much you Owe in this Group ?"
@@ -104,19 +108,23 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/playwrite_grund_regular"
                     android:text="Expenses"
+                    android:textColor="@color/black"
                     android:textSize="28dp"
                     android:textStyle="bold" />
             </FrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/expenseRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frameLayout6" />
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout6"
+                tools:listitem="@layout/expense_item"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/expenseFAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

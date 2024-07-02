@@ -3,6 +3,7 @@ package com.example.splitwise
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.Toast
@@ -10,8 +11,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.splitwise.adapters.addFriendAdapter
+import com.example.splitwise.adapters.friendsPreviewAdapter
 import com.example.splitwise.databinding.ActivityExpenseBinding
 import com.example.splitwise.databinding.AddFriendInGroupBinding
+import com.example.splitwise.models.GroupModel
 import com.example.splitwise.models.UserModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -20,12 +23,14 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import org.jetbrains.annotations.Async
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class ExpenseActivity : AppCompatActivity(),addFriendAdapter.ItemClickListener {
+@Suppress("IMPLICIT_CAST_TO_ANY")
+class ExpenseActivity : AppCompatActivity(), addFriendAdapter.ItemClickListener {
     val binding: ActivityExpenseBinding by lazy {
         ActivityExpenseBinding.inflate(layoutInflater)
     }
@@ -35,22 +40,67 @@ class ExpenseActivity : AppCompatActivity(),addFriendAdapter.ItemClickListener {
     private lateinit var splitDialog: Dialog
     private val calender = Calendar.getInstance()
     private lateinit var auth: FirebaseAuth
-    private lateinit var rootRef: DatabaseReference
+    private lateinit var expenseRef: DatabaseReference
+    private var selectedGroupId: String = String()
+    private var selectedGroupName: String = String()
+    private var expenseName: String = String()
+    private var expenseAmount: String = String()
+    private var paidByMemberPosition: Int? = null
+    private var amountToEachMember: Float? = null
+    private var selectedMembersId: ArrayList<String> = arrayListOf()
+    private var selectedMembersName: ArrayList<String> = arrayListOf()
+    private var amountToSelectedMember: Float? = null
+    private var groupDetails: GroupModel?=null
+    private var groupMenbers:Array<String> = arrayOf()
+    private var addMemberAdapter: addFriendAdapter? = null
+    private var memberPreviewAdapter: friendsPreviewAdapter? = null
+    private var allMemberDataList = ArrayList<UserModel>()
+    private var allMembersName = ArrayList<String>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
+        auth = FirebaseAuth.getInstance()
 
-//      For Dialog box of Radio Buttons
+//      Getting User Data-----------------------------------------------------------------------------------------------------------------------
+        expenseName = binding.expenseName.text.toString()
+        expenseAmount = binding.expenseAmount.text.toString()
+//      For getting intent data-----------------------------------------------------------------------------------------------------------------------
+        selectedGroupId = intent.getStringExtra("groupId").toString()
+        selectedGroupName = intent.getStringExtra("groupName").toString()
+
+//      For Spinner of Paid by Menu-----------------------------------------------------------------------------------------------------------------------
+        getMembersId()
+        val mArrayAdapter = ArrayAdapter<String>(this, R.layout.spinner_list,
+            allMembersName as List<String>
+        )
+        mArrayAdapter.setDropDownViewResource(R.layout.spinner_list)
+        binding.paidByMenu.adapter = mArrayAdapter
+        paidByMemberPosition = binding.paidByMenu.selectedItemPosition
+//      For Dialog box of Radio Buttons---------------------------------------------------------------------------------------------------------------
         splitDialog = Dialog(this)
         splitDialog.setContentView(binding2.root)
-        getFriendIds()
         binding.splitRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             val selectedOption = when (checkedId) {
-                R.id.splitEqually -> "Split Equally"
+                R.id.splitEqually -> {
+                    selectedMembersId.clear()
+                    selectedMembersName.clear()
+                    memberPreviewAdapter!!.notifyDataSetChanged()
+
+                }
+//                    val noOfMembers: Int = groupDetails.groupMembers!!.size
+//                    amountToEachMember =
+//                        (expenseAmount.toInt()) / (noOfMembers.toBigInteger()).toFloat()
+
+
                 R.id.splitInBetween -> {
                     splitDialog.show()
+                    binding2.AddFriendButton.setOnClickListener {
+                        setMemberPreviewAdapter()
+                        splitDialog.dismiss()
+                    }
                 }
 
                 else -> "None"
@@ -59,13 +109,8 @@ class ExpenseActivity : AppCompatActivity(),addFriendAdapter.ItemClickListener {
         }
 
 
-//      For Spinner of Paid by Menu
-        val mList = arrayOf<String?>("Harsh", "Prince", "Azad", "Shivam", "Nitin")
-        val mArrayAdapter = ArrayAdapter<Any?>(this, R.layout.spinner_list, mList)
-        mArrayAdapter.setDropDownViewResource(R.layout.spinner_list)
-        binding.paidByMenu.adapter = mArrayAdapter
 
-//      For Date Picker
+//      For Date Picker------------------------------------------------------------------------------------------------------------------------------------
         val date = Calendar.getInstance()
         date.set(
             calender.get(Calendar.YEAR),
@@ -78,23 +123,32 @@ class ExpenseActivity : AppCompatActivity(),addFriendAdapter.ItemClickListener {
         binding.dateText.setOnClickListener {
             openDateDialog()
         }
+//      For getting MembersIds-----------------------------------------------------------------------------------------------------------------------
+
 
     }
 
-    private fun getFriendIds() {
+    private fun setMemberPreviewAdapter() {
+        memberPreviewAdapter = friendsPreviewAdapter(selectedMembersName, this)
+        binding.expenseRecyclerView.adapter = memberPreviewAdapter
+        binding.expenseRecyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun getMembersId() {
         val userId = auth.currentUser!!.uid
-        val friendsList = ArrayList<String>()
+        val membersIdList = ArrayList<String>()
         auth = FirebaseAuth.getInstance()
-        rootRef = Firebase.database.reference.child("Users").child(userId).child("friends")
-        rootRef.addListenerForSingleValueEvent(object : ValueEventListener {
+        expenseRef =
+            Firebase.database.reference.child("Groups").child(selectedGroupId).child("groupMembers")
+        expenseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for (friendId in snapshot.children) {
-                    val friend = friendId.getValue(String::class.java)
-                    if (friend != null) {
-                        friendsList.add(friend)
+                for (memberId in snapshot.children) {
+                    val member = memberId.getValue(String::class.java)
+                    if (member != null) {
+                        membersIdList.add(member)
                     }
                 }
-                getFriendsData(friendsList)
+                getMembersData(membersIdList)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -102,39 +156,45 @@ class ExpenseActivity : AppCompatActivity(),addFriendAdapter.ItemClickListener {
                     .show()
             }
         })
+
     }
 
-    private fun getFriendsData(friendsList: ArrayList<String>) {
-        val friendsDataList = ArrayList<UserModel>()
-        val friendNames= ArrayList<String>()
+    private fun getMembersData(memberIdList: ArrayList<String>) {
+
         auth = FirebaseAuth.getInstance()
-        for (friendId in friendsList) {
-            rootRef = Firebase.database.reference.child("Users").child(friendId)
-            rootRef.addListenerForSingleValueEvent(object:ValueEventListener{
+        for (memberId in memberIdList) {
+            expenseRef = Firebase.database.reference.child("Users").child(memberId)
+            expenseRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val friendData = snapshot.getValue(UserModel::class.java)
-                    if (friendData != null) {
-                        friendsDataList.add(friendData)
+                    val memberData = snapshot.getValue(UserModel::class.java)
+
+                    if (memberData != null) {
+                        allMemberDataList.add(memberData)
+                        allMembersName.add(memberData.userName.toString())
+
                     }
-                    friendNames.add(friendData?.userName!!)
+                    if (memberId == memberIdList.last()) {
+                        setAddFriendAdapter(allMemberDataList)
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(this@ExpenseActivity, "Data not Retrieved", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ExpenseActivity, "Data not Retrieved", Toast.LENGTH_SHORT)
+                        .show()
                 }
             })
 
         }
-        setAddFriendAdapter(friendsDataList)
-
 
 
     }
 
     private fun setAddFriendAdapter(friendsDataList: ArrayList<UserModel>) {
-        val adapter = addFriendAdapter(friendsDataList,this,this)
-        binding2.addFriendRecyclerView.adapter = adapter
+
+        addMemberAdapter = addFriendAdapter(friendsDataList, this, this)
+        binding2.addFriendRecyclerView.adapter = addMemberAdapter
         binding2.addFriendRecyclerView.layoutManager = LinearLayoutManager(this)
+        addMemberAdapter!!.notifyDataSetChanged()
     }
 
     private fun openDateDialog() {
@@ -154,8 +214,11 @@ class ExpenseActivity : AppCompatActivity(),addFriendAdapter.ItemClickListener {
         datePickerDialog.show()
     }
 
-    override fun onCheckedCheckbox(position: Int, friend: UserModel) {
-        TODO("Not yet implemented")
+    override fun onCheckedCheckbox( member: UserModel) {
+        if (!selectedMembersId!!.contains(member.userId!!)) {
+            selectedMembersId!!.add(member.userId!!)
+            selectedMembersName!!.add(member.userName!!)
+        }
     }
 
 }

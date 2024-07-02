@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.splitwise.databinding.FriendsItemBinding
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
+import com.example.splitwise.friendsActivity
 import com.example.splitwise.models.UserModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -22,6 +24,9 @@ class friendsAdapter(
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private var rootRef = Firebase.database.reference.child("Users")
+    private var selectedFriendName:String = String()
+    private var selectedFriendId:String = String()
+    private var selectedFriendEmail:String = String()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): friendsViewHolder {
         val binding = FriendsItemBinding.inflate(
@@ -46,8 +51,11 @@ class friendsAdapter(
                 rootRef.child(friendId).addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val friend = snapshot.getValue(UserModel::class.java)
-                        friendName.text = friend!!.userName
-                        friendEmail.text = friend.email
+                        selectedFriendId = friend!!.userId.toString()
+                        selectedFriendName = friend.userName.toString()
+                        selectedFriendEmail = friend.email.toString()
+                        friendName.text = selectedFriendName
+                        friendEmail.text = selectedFriendEmail
                         if (friend.userImage != "") {
                             Glide.with(context).load(friend.userImage).into(profileImage)
                         }
@@ -58,7 +66,12 @@ class friendsAdapter(
                         Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()
                     }
                 })
-
+                friendCardView.setOnClickListener{
+                    val intent = Intent(context,friendsActivity::class.java)
+                    intent.putExtra("friendName",selectedFriendName)
+                    intent.putExtra("friendId",selectedFriendId)
+                    context.startActivity(intent)
+                }
             }
         }
     }

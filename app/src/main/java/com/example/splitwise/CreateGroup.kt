@@ -140,7 +140,7 @@ class CreateGroup : AppCompatActivity(), addFriendAdapter.ItemClickListener {
     }
 
 
-    override fun onCheckedCheckbox(position: Int, friend: UserModel) {
+    override fun onCheckedCheckbox( friend: UserModel) {
         if (!groupMembersId.contains(friend.userId)) {
             groupMembersId.add(friend.userId!!)
             groupMembersName.add(friend.userName!!)
@@ -149,7 +149,7 @@ class CreateGroup : AppCompatActivity(), addFriendAdapter.ItemClickListener {
     }
 
     private fun setGroupInFirebase() {
-        val group: GroupModel = GroupModel()
+        val group: GroupModel=GroupModel()
         val auth = FirebaseAuth.getInstance()
         val rootRef = Firebase.database.reference.child("Groups")
         groupKey = rootRef.push().key.toString()
@@ -168,7 +168,6 @@ class CreateGroup : AppCompatActivity(), addFriendAdapter.ItemClickListener {
     }
 
     private fun setAdapterToFriendListPreview() {
-        Toast.makeText(this@CreateGroup, "$groupMembersName", Toast.LENGTH_SHORT).show()
         val adapter = friendsPreviewAdapter(groupMembersName, this)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)

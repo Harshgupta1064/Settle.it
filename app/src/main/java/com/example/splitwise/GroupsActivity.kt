@@ -1,20 +1,45 @@
 package com.example.splitwise
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.splitwise.databinding.ActivityGroupsBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 
 class GroupsActivity : AppCompatActivity() {
+    private val binding: ActivityGroupsBinding by lazy {
+        ActivityGroupsBinding.inflate(layoutInflater)
+    }
+    private lateinit var auth:FirebaseAuth
+    private lateinit var expenseRef:DatabaseReference
+    private var selectedGroupName:String = String()
+    private var selectedGroupId :String = String()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_groups)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        setContentView(binding.root)
+        selectedGroupName = intent.getStringExtra("groupName").toString()
+        selectedGroupId = intent.getStringExtra("groupId").toString()
+        binding.groupName.text = selectedGroupName
+        binding.expenseFAB.setOnClickListener{
+            val intentExpense = Intent(this,ExpenseActivity::class.java)
+            intentExpense.putExtra("groupName",selectedGroupName)
+            intentExpense.putExtra("groupId",selectedGroupId)
+            startActivity(intentExpense)
         }
+        binding.friendsListButton.setOnClickListener{
+            val intentFriendList = Intent(this,FriendsListActivity::class.java)
+            intentFriendList.putExtra("groupName",selectedGroupName)
+            intentFriendList.putExtra("groupId",selectedGroupId)
+            startActivity(intentFriendList)
+        }
+        binding.howMuchYouOweButton.setOnClickListener{
+            val intentOweMoney = Intent(this,UserOweInGroupActivity::class.java)
+            intentOweMoney.putExtra("groupName",selectedGroupName)
+            intentOweMoney.putExtra("groupId",selectedGroupId)
+            startActivity(intentOweMoney)
+        }
+
     }
 }
