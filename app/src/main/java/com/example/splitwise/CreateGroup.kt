@@ -147,6 +147,12 @@ class CreateGroup : AppCompatActivity(), addFriendAdapter.ItemClickListener {
 
         }
     }
+    override fun onUncheckedCheckbox(member: UserModel) {
+        if (groupMembersId.contains(member.userId!!)) {
+            groupMembersId.remove(member.userId!!)
+            groupMembersId.remove(member.userName!!)
+        }
+    }
 
     private fun setGroupInFirebase() {
         val group: GroupModel=GroupModel()

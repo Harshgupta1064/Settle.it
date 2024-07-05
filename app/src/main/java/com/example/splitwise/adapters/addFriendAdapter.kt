@@ -19,6 +19,7 @@ class addFriendAdapter(
         this.itemClickListener = listener
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): addFriendViewHolder {
         val binding =
             AddFriendItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -39,16 +40,23 @@ class addFriendAdapter(
         fun bind(position: Int) {
             val friend = friendsList[position]
             binding.friendName.text = friend.userName // Assuming friendName is a CheckBox
-            binding.friendName.setOnCheckedChangeListener{ _, isChecked ->
-                if(isChecked){
+            binding.friendName.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
                     itemClickListener.onCheckedCheckbox(friend)
+                    notifyDataSetChanged()
+                } else if (!isChecked) {
+                    itemClickListener.onUncheckedCheckbox(friend)
+                    notifyDataSetChanged()
                 }
             }
         }
+
     }
 
     interface ItemClickListener {
-        fun onCheckedCheckbox(friend:UserModel)
+        fun onCheckedCheckbox(friend: UserModel)
+        fun onUncheckedCheckbox(friend: UserModel)
+
     }
 
 
