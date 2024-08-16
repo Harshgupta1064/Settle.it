@@ -59,6 +59,12 @@ class friendsAdapter(
                         if (friend.userImage != "") {
                             Glide.with(context).load(friend.userImage).into(profileImage)
                         }
+                        friendCardView.setOnClickListener{
+                            val intent = Intent(context,friendsActivity::class.java)
+                            intent.putExtra("friendName",selectedFriendName)
+                            intent.putExtra("friendId",selectedFriendId)
+                            context.startActivity(intent)
+                        }
 
                     }
 
@@ -66,12 +72,6 @@ class friendsAdapter(
                         Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()
                     }
                 })
-                friendCardView.setOnClickListener{
-                    val intent = Intent(context,friendsActivity::class.java)
-                    intent.putExtra("friendName",selectedFriendName)
-                    intent.putExtra("friendId",selectedFriendId)
-                    context.startActivity(intent)
-                }
             }
         }
     }

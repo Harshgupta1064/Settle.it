@@ -48,6 +48,9 @@
             android:name=".ExpenseActivity"
             android:exported="false" />
         <activity
+            android:name=".FriendsExpenseActivity"
+            android:exported="false" />
+        <activity
             android:name=".FriendsListActivity"
             android:exported="false" />
         <activity

@@ -56,6 +56,7 @@ class GroupsFragment : Fragment() {
                         }
 
                     }
+                    groupIdList!!.reverse()
                     setAdapter()
                 }
 
@@ -71,7 +72,6 @@ class GroupsFragment : Fragment() {
     }
 
     private fun setAdapter() {
-//        Toast.makeText(requireContext(), "$groupIdList", Toast.LENGTH_SHORT).show()
         if (groupIdList != null) {
             adapter = groupsAdapter(groupIdList!!, requireContext())
             binding.groupRecyclerView.adapter = adapter

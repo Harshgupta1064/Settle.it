@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.splitwise.adapters.friendsAdapter
+import com.example.splitwise.adapters.groupsAdapter
 import com.example.splitwise.databinding.FragmentFriendsBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -73,6 +74,8 @@ class FriendsFragment : Fragment() {
                     Handler(Looper.getMainLooper()).post {
                         adapter.notifyDataSetChanged()
                     }
+                    friendsList.reverse()
+                    setAdapter(friendsList)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -82,5 +85,13 @@ class FriendsFragment : Fragment() {
                     ).show()
                 }
             })
+    }
+
+    private fun setAdapter(friendsList: java.util.ArrayList<String>) {
+        if (friendsList != null) {
+            adapter = friendsAdapter(friendsList,requireContext())
+            binding.friendRecyclerView.adapter = adapter
+            binding.friendRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        }
     }
 }
