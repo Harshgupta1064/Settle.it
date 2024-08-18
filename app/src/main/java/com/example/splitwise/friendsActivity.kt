@@ -63,6 +63,7 @@ class friendsActivity : AppCompatActivity() {
                         balancesList.add(balanceAmount!!)
                     }
                 }
+                setLayoutData(balancesList)
                 setAdapter(balancesList)
 
             }
@@ -72,6 +73,23 @@ class friendsActivity : AppCompatActivity() {
                     .show()
             }
         })
+    }
+
+    private fun setLayoutData(balancesList: ArrayList<BalanceAmountDetails>) {
+        var positive: Int = 0
+        var negative: Int = 0
+        for (balance in balancesList) {
+            balance.amount?.let { amount ->
+                if (balance.owedBy == auth.currentUser!!.uid) {
+                    negative += amount.toInt()
+                } else {
+                    positive += amount.toInt()
+                }
+            }
+        }
+        binding.youOweFriend.text = ("Rs "+negative.toString())
+        binding.friendOwesYou.text = ("Rs "+positive.toString())
+        binding.netAmount.text = ("Rs "+(positive-negative).toString())
     }
 
     private fun setAdapter(balancesList: ArrayList<BalanceAmountDetails>) {

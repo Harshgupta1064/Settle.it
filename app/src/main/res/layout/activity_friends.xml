@@ -6,10 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
+    android:fitsSystemWindows="true"
     tools:context=".friendsActivity">
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/netAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/playwrite_grund_regular"
@@ -20,7 +21,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/friendOwesYou"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/playwrite_grund_regular"
@@ -39,6 +40,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
+            android:id="@+id/backButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
@@ -144,6 +146,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/playwrite_grund_regular"
                     android:text="Expenses"
+                    android:textColor="@color/black"
                     android:textSize="28dp"
                     android:textStyle="bold" />
             </FrameLayout>
@@ -167,6 +170,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:foregroundTint="@color/black"
             android:backgroundTint="@color/white"
             android:src="@android:drawable/ic_input_add"
             app:rippleColor="@color/black" />
@@ -174,7 +178,7 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/youOweFriend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/playwrite_grund_regular"

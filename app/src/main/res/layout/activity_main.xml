@@ -24,8 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:fontFamily="@font/charm_regular"
-            android:text="Settle.it"
+            android:fontFamily="@font/playwrite_grund_regular"
+            android:text="Settle.It"
             android:textColor="@color/white"
             android:textSize="32sp" />
 
