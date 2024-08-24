@@ -1,10 +1,12 @@
 package com.example.splitwise.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.splitwise.ExpenseDetails
 import com.example.splitwise.adapters.expenseAdapter.ExpenseViewHolder
 import com.example.splitwise.databinding.ExpenseItemBinding
 import com.example.splitwise.models.BalanceAmountDetails
@@ -73,6 +75,19 @@ class FriendsExpenseAdapter(
                                                 .show()
                                         }
                                     })
+                                binding.expenseCardView.setOnClickListener{
+
+                                    val intent = Intent(context, ExpenseDetails::class.java)
+                                    intent.putExtra("expenseId", balance.expenseId)
+                                    intent.putExtra("expenseName", expense.expenseName)
+                                    intent.putExtra("expenseDate", expense.dateOfExpense)
+                                    intent.putExtra("expensePaidBy", balance.owedTo)
+                                    intent.putExtra("expenseOwedBy", balance.owedBy)
+                                    intent.putExtra("owedAmount", balance.amount.toString())
+                                    intent.putExtra("expenseAmount", balance.expenseAmount.toString())
+
+                                    context.startActivity(intent)
+                                }
                             }
                         }
                     }
@@ -82,6 +97,7 @@ class FriendsExpenseAdapter(
                             .show()
                     }
                 })
+
         }
         }
     }

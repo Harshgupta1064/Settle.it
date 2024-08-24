@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".UserOweInGroupActivity">
 
     <FrameLayout
@@ -31,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/playwrite_grund_regular"
-            android:text="How musch You Owe ?"
+            android:text="How much You Owe ?"
             android:textColor="@color/white"
             android:textSize="24dp" />
 
@@ -39,7 +40,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/appCompatButton2"
+        android:id="@+id/settleUpButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
@@ -55,13 +56,14 @@
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userOweRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatButton2"
-        tools:listitem="@layout/user_owe_in_group_item"/>
+        app:layout_constraintTop_toBottomOf="@+id/settleUpButton"
+        tools:listitem="@layout/user_owe_in_group_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

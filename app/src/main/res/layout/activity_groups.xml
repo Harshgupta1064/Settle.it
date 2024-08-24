@@ -40,56 +40,57 @@
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/frameLayout4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" >
+        app:layout_constraintTop_toBottomOf="@+id/view">
 
         <TextView
             android:id="@+id/friendsListButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Friends List"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/playwrite_grund_regular"
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:fontFamily="@font/playwrite_grund_regular"
+            android:text="Friends List"
             android:textColor="@color/black"
-            android:background="@drawable/button_background"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp" />
-
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
 
         <TextView
             android:id="@+id/howMuchYouOweButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="How much you Owe in this Group ?"
-            android:textSize="18dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="92dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/playwrite_grund_regular"
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:textStyle="bold"
-            android:fontFamily="@font/playwrite_grund_regular"
+            android:text="How much you Owe in this Group ?"
             android:textColor="@color/black"
-            android:background="@drawable/button_background"
-            android:layout_marginTop="92dp"
-            android:layout_marginLeft="16dp" />
+            android:textSize="18dp"
+            android:textStyle="bold" />
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frameLayout5"
         android:layout_width="match_parent"
-        android:layout_height="650dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/frame_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout4">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -122,8 +123,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/frameLayout6"
-                tools:listitem="@layout/expense_item"/>
+                tools:listitem="@layout/expense_item" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/expenseFAB"
             android:layout_width="wrap_content"

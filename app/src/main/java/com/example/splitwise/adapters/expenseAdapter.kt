@@ -22,6 +22,7 @@ class expenseAdapter(
 ) : RecyclerView.Adapter<expenseAdapter.ExpenseViewHolder>() {
     private val auth = FirebaseAuth.getInstance()
     private val rootRef = FirebaseDatabase.getInstance().reference
+    private var paidByName:String?=null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseViewHolder {
         val binding = ExpenseItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -51,7 +52,9 @@ class expenseAdapter(
                 rootRef.child("Users").child(expense.paidBy!!).child("userName")
                     .addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
+                            paidByName = snapshot.getValue(String::class.java)!!
                             addedBy.text = "Added by ${snapshot.getValue(String::class.java)!!}"
+
                         }
 
                         override fun onCancelled(error: DatabaseError) {
@@ -64,13 +67,13 @@ class expenseAdapter(
                     intent.putExtra("expenseId", expense.expenseId)
                     intent.putExtra("expenseName", expense.expenseName)
                     intent.putExtra("expenseDate", expense.dateOfExpense)
-                    intent.putExtra("expensePaidBy", expense.paidBy)
-                    intent.putExtra("expenseAmount", expense.amount)
-                    var owedAmount = (expense.amount/ expense.splitBetween?.size!!)
-                    intent.putExtra("owedAmount", owedAmount)
+                    intent.putExtra("expensePaidBy",paidByName)
+                    intent.putExtra("expenseAmount", expense.amount.toString())
+                    expense.splitBetween?.let { it1 -> intent.putExtra("members", it1.size) }
 
                     context.startActivity(intent)
                 }
+
 
             }
 

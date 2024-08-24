@@ -80,6 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="14dp"
         android:fontFamily="@font/playwrite_grund_regular"
         android:text="FriendName Owes you : "
         android:textColor="@color/white"
@@ -93,11 +94,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="14dp"
         android:fontFamily="@font/playwrite_grund_regular"
         android:text="Net Amount : "
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -106,23 +107,22 @@
         android:id="@+id/appCompatButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/button_background"
         android:fontFamily="@font/playwrite_grund_regular"
         android:text="Settle Up"
-        android:textColor="@color/black"
-        android:layout_marginLeft="16dp"
-        android:textStyle="bold"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
         android:textAllCaps="false"
+        android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout5"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <FrameLayout
         android:id="@+id/frameLayout5"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="500dp"
         android:background="@drawable/frame_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -157,8 +157,10 @@
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frameLayout6" />
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout6"
+                app:layout_constraintVertical_bias="1.0" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -170,8 +172,8 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:foregroundTint="@color/black"
             android:backgroundTint="@color/white"
+            android:foregroundTint="@color/black"
             android:src="@android:drawable/ic_input_add"
             app:rippleColor="@color/black" />
 
