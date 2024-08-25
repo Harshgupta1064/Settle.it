@@ -39,7 +39,7 @@
             android:name=".PaymentOptionsPage"
             android:exported="true" />
         <activity
-            android:name=".SettleUpPage"
+            android:name=".GroupExpenseFriendDetails"
             android:exported="false" />
         <activity
             android:name=".UserOweInGroupActivity"

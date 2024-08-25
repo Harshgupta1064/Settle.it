@@ -1,9 +1,12 @@
 package com.example.splitwise.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.splitwise.ExpenseDetails
+import com.example.splitwise.GroupExpenseFriendDetails
 import com.example.splitwise.databinding.UserOweInGroupItemBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -38,7 +41,15 @@ class userOweAdapter(
         fun bind(position: Int, friendId: String?) {
             val balance = friendsOwe[position][friendId]
             binding.apply {
-                balanceAmount.text = "Rs. ${balance}"
+                if(balance!!>=0){
+                    owe.text = "You Owe"
+                    balanceAmount.text = "Rs. ${balance}"
+                }
+                else{
+                    owe.text = "Owes You"
+                    balanceAmount.text = "Rs. ${balance*(-1)}"
+                }
+
                 rootRef.child("Users").child(friendId!!).child("userName").addListenerForSingleValueEvent(object:
                     ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -49,6 +60,13 @@ class userOweAdapter(
 
                     }
                 })
+                friendCard.setOnClickListener{
+                    val intent = Intent(context, GroupExpenseFriendDetails::class.java)
+                    intent.putExtra("friendId",friendId)
+                    intent.putExtra("friendName",friendName.text)
+                    intent.putExtra("balance",balance.toInt())
+                    context.startActivity(intent)
+                }
             }
         }
     }
