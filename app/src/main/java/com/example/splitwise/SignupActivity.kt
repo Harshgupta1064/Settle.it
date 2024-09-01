@@ -3,6 +3,7 @@ package com.example.splitwise
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Contacts
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -42,7 +43,7 @@ class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.your_web_client_id)).requestEmail().build()
+            .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
         setContentView(binding.root)
 
         // Initialize Firebase Auth
@@ -146,6 +147,8 @@ class SignupActivity : AppCompatActivity() {
                     if (authTask.isSuccessful) {
                         // Successfully signed in with Google
                         Toast.makeText(this, "Successfully Signed in with Google", Toast.LENGTH_SHORT).show()
+                        name = account.displayName!!
+                        email = account.email!!
                         saveUserData()
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()

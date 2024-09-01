@@ -1,6 +1,7 @@
 package com.example.splitwise
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -15,9 +16,13 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import dev.shreyaspatil.easyupipayment.EasyUpiPayment
+import dev.shreyaspatil.easyupipayment.listener.PaymentStatusListener
+import dev.shreyaspatil.easyupipayment.model.TransactionDetails
+import kotlin.math.abs
 import kotlin.properties.Delegates
 
-class ExpenseDetails : AppCompatActivity() {
+class ExpenseDetails : AppCompatActivity(), PaymentStatusListener {
     private val binding: ActivityExpenseDetailsBinding by lazy {
         ActivityExpenseDetailsBinding.inflate(layoutInflater)
     }
@@ -30,6 +35,7 @@ class ExpenseDetails : AppCompatActivity() {
     private var members:Int ?=null
     private lateinit var userId: String
     private var friendId: String?=null
+    private var friendName: String?=null
     private var userName: String?=null
     private lateinit var auth: FirebaseAuth
 
@@ -50,7 +56,7 @@ class ExpenseDetails : AppCompatActivity() {
         expenseAmount = intent.getStringExtra("expenseAmount").toString()
         members = intent.getIntExtra("members",0)
         owedAmount = intent.getStringExtra("owedAmount").toString()
-        friendId = intent.getStringExtra("expenseOwedBy").toString()
+        friendId = intent.getStringExtra("expenseOwedBy")
 
 
         if(friendId==null){
@@ -68,7 +74,7 @@ class ExpenseDetails : AppCompatActivity() {
             Firebase.database.reference.child("Users").child(friendId!!).child("userName").addListenerForSingleValueEvent(object:ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if(snapshot.exists()) {
-                        val friendName = snapshot.getValue(String::class.java)!!
+                        friendName = snapshot.getValue(String::class.java)!!
                         binding.owedBy.text = friendName
                         binding.owedTo.text = "You"
                         binding.expenseName.text = expenseName
@@ -89,18 +95,49 @@ class ExpenseDetails : AppCompatActivity() {
 
 //        binding.owedAmount.text = (expenseAmount.toInt()/ members!!).toString()
 
+
         binding.settleItButton.setOnClickListener {
-            val intent = Intent(this, PaymentOptionsPage::class.java)
-            intent.putExtra("expenseId", expenseId)
-            intent.putExtra("expenseName", expenseName)
-            intent.putExtra("expenseDate", dateOfExpense)
-            intent.putExtra("expensePaidBy", expensePaidBy)
-            intent.putExtra("expenseAmount", expenseAmount)
-            intent.putExtra("owedAmount", owedAmount)
-            startActivity(intent)
+//            initiateUpiPayment()
+            val uri = Uri.parse("upi://pay?pa=9039314701@ptsbi&pn=Harsh%20Gupta&tn=Transaction%20Description&am=100.00&cu=INR")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+
+              // Optional to target a specific UPI app (Google Pay)
+            startActivityForResult(intent, 101)
+
         }
 
 
 
+
+
+
     }
+    private fun initiateUpiPayment() {
+        try {
+            val easyUpiPayment = EasyUpiPayment.Builder(this)
+                .setPayeeName("Harsh Gupta")
+                .setPayeeVpa("9039314701@ptsbi")
+                .setTransactionId(System.currentTimeMillis().toString())
+                .setTransactionRefId(System.currentTimeMillis().toString())
+                .setDescription("Payment Description")
+                .setAmount("100.00")  // Amount is converted to string
+                .build()
+
+            easyUpiPayment.setPaymentStatusListener(this)
+            easyUpiPayment.startPayment()
+
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun onTransactionCancelled() {
+        Toast.makeText(this, "Transaction Failed", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onTransactionCompleted(transactionDetails: TransactionDetails) {
+        Toast.makeText(this, "Transaction Successful  ${transactionDetails}", Toast.LENGTH_SHORT).show()
+    }
+
 }

@@ -53,6 +53,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation ("dev.shreyaspatil.EasyUpiPayment:EasyUpiPayment:3.0.3")
     implementation("com.google.android.gms:play-services-auth:21.0.0")
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("io.realm:realm-android-library:10.8.0")

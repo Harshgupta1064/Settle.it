@@ -55,7 +55,7 @@ class LoginScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(R.string.your_web_client_id.toString()).requestEmail().build()
+            .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)

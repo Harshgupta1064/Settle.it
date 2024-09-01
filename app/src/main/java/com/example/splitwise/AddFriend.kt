@@ -140,7 +140,7 @@ class AddFriend : AppCompatActivity() {
                         addFriend(userId, friendId)
                         // Save user to friend data
                         addFriend(friendId, userId)
-                        startActivity(Intent(this@AddFriend, MainActivity::class.java))
+                        finish()
                     }
                 }
 

@@ -257,7 +257,13 @@ class ExpenseActivity : AppCompatActivity(), addFriendAdapter.ItemClickListener 
     }
 
     private fun addExpense(members: ArrayList<String>) {
+
+        val userId = auth.currentUser?.uid
+        val ref = Firebase.database.reference.child("Expenses")
+        expenseId = ref.push().key!!
         val expense: ExpenseModel = ExpenseModel(
+            expenseId=expenseId,
+            createdBy = userId,
             expenseName = expenseName,
             amount = expenseAmount.toInt(),
             paidBy = paidByMemberId,
@@ -265,10 +271,6 @@ class ExpenseActivity : AppCompatActivity(), addFriendAdapter.ItemClickListener 
             dateOfExpense = dateOfExpense,
             groupId = selectedGroupId
         )
-        val userId = auth.currentUser?.uid
-        expense.createdBy = userId
-        val ref = Firebase.database.reference.child("Expenses")
-        expenseId = ref.push().key!!
         ref.child(expenseId).setValue(expense)
         addBalanceAmountDetails()
     }
