@@ -3,6 +3,7 @@ package com.example.splitwise
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -97,12 +98,8 @@ class ExpenseDetails : AppCompatActivity(), PaymentStatusListener {
 
 
         binding.settleItButton.setOnClickListener {
-//            initiateUpiPayment()
-            val uri = Uri.parse("upi://pay?pa=9039314701@ptsbi&pn=Harsh%20Gupta&tn=Transaction%20Description&am=100.00&cu=INR")
-            val intent = Intent(Intent.ACTION_VIEW, uri)
+            initiateUpiPayment()
 
-              // Optional to target a specific UPI app (Google Pay)
-            startActivityForResult(intent, 101)
 
         }
 
@@ -113,24 +110,26 @@ class ExpenseDetails : AppCompatActivity(), PaymentStatusListener {
 
     }
     private fun initiateUpiPayment() {
-        try {
-            val easyUpiPayment = EasyUpiPayment.Builder(this)
-                .setPayeeName("Harsh Gupta")
-                .setPayeeVpa("9039314701@ptsbi")
-                .setTransactionId(System.currentTimeMillis().toString())
-                .setTransactionRefId(System.currentTimeMillis().toString())
-                .setDescription("Payment Description")
-                .setAmount("100.00")  // Amount is converted to string
-                .build()
+
+
+
+
+            val easyUpiPayment = EasyUpiPayment(this) {
+                this.payeeVpa = "hg19102004@okaxis"
+                this.payeeName = "Harsh Gupta"
+                this.payeeMerchantCode = "12345"
+                this.transactionId = "T2020090212345"
+                this.transactionRefId = "T2020090212345"
+                this.description = "Description"
+                this.amount = "101.00"
+            }
 
             easyUpiPayment.setPaymentStatusListener(this)
             easyUpiPayment.startPayment()
 
-        } catch (e: NullPointerException) {
-            e.printStackTrace()
-            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
-        }
     }
+
+
 
     override fun onTransactionCancelled() {
         Toast.makeText(this, "Transaction Failed", Toast.LENGTH_SHORT).show()
