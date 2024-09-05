@@ -1,5 +1,5 @@
 <h1>Settle It</h1>
-<p>This app is designed to help groups of friends or users track shared expenses, similar to how Splitwise works. It simplifies the process of splitting bills and ensures transparency in tracking who owes what.</p>
+<p>This app is designed to help groups of friends or users track shared expenses.It simplifies the process of splitting bills and ensures transparency in tracking who owes what.</p>
 
 <h2>Features</h2>
 <ul>
