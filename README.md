@@ -32,7 +32,7 @@
     <li>Clone the repository:</li>
 </ol>
 
-<pre><code>git clone [https://github.com/Harshgupta1064/Settle.it]</code></pre>
+<pre><code>git clone https://github.com/Harshgupta1064/Settle.it.git</code></pre>
 
 <ol start="2">
     <li>Open the project in Android Studio.</li>
