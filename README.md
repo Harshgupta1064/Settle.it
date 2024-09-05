@@ -49,9 +49,12 @@
 </ol>
 
 
-Usage
-Sign Up/Log In: New users need to sign up with an email or Google account.
-Create Groups: Add friends by selecting from contacts or entering details manually.
-Add Expenses: Record expenses and select the payer. Split the cost equally or manually adjust shares.
-View Summary: Check how much each member owes or is owed in real-time.
-Settle Up: Once debts are paid, mark them as settled to update the balance.
+<h2>Usage</h2>
+<ul>
+    <li><strong>Sign Up/Log In:</strong> New users need to sign up with an email or Google account.</li>
+    <li><strong>Create Groups:</strong> Add friends by selecting from contacts or entering details manually.</li>
+    <li><strong>Add Expenses:</strong> Record expenses and select the payer. Split the cost equally or manually adjust shares.</li>
+    <li><strong>View Summary:</strong> Check how much each member owes or is owed in real-time.</li>
+    <li><strong>Settle Up:</strong> Once debts are paid, mark them as settled to update the balance.</li>
+</ul>
+
